@@ -1,22 +1,25 @@
+import os
 import pygame
+
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 class Piece:
     def __init__(self, size):
         self.size = size
         self.piece = {
-            "black bishop": "assests/B_BISHOP.png",
-            "black king": "assests/B_KING.png",
-            "black knight": "assests/B_KNIGHT.png",
-            "black pawn": "assests/B_PAWN.png",
-            "black queen": "assests/B_QUEEN.png",
-            "black rook": "assests/B_ROOK.png",
-            "white bishop": "assests/W_BISHOP.png",
-            "white king": "assests/W_KING.png",
-            "white knight": "assests/W_KNIGHT.png",
-            "white pawn": "assests/W_PAWN.png",
-            "white queen": "assests/W_QUEEN.png",
-            "white rook": "assests/W_ROOK.png",
+            "black bishop": BASE_PATH + "/assets/B_BISHOP.png",
+            "black king": BASE_PATH + "/assets/B_KING.png",
+            "black knight": BASE_PATH + "/assets/B_KNIGHT.png",
+            "black pawn": BASE_PATH + "/assets/B_PAWN.png",
+            "black queen": BASE_PATH + "/assets/B_QUEEN.png",
+            "black rook": BASE_PATH + "/assets/B_ROOK.png",
+            "white bishop": BASE_PATH + "/assets/W_BISHOP.png",
+            "white king": BASE_PATH + "/assets/W_KING.png",
+            "white knight": BASE_PATH + "/assets/W_KNIGHT.png",
+            "white pawn": BASE_PATH + "/assets/W_PAWN.png",
+            "white queen": BASE_PATH + "/assets/W_QUEEN.png",
+            "white rook": BASE_PATH + "/assets/W_ROOK.png",
         }
 
     def get_piece(self, piece_name):

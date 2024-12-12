@@ -1,7 +1,10 @@
+import os
 import sys
 
 import pygame
 from chessBoard import ChessBoard
+
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 SOLID_BLUE = (50, 50, 200, 127)
 BG_COLOR = (4, 84, 4)
@@ -17,7 +20,7 @@ pygame.init()
 screen = pygame.display.set_mode((800, 450), pygame.RESIZABLE)
 # screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 pygame.display.set_caption("Chess")
-pygame.display.set_icon(pygame.image.load("assests/W_QUEEN.png"))
+pygame.display.set_icon(pygame.image.load(BASE_PATH + "/assets/W_QUEEN.png"))
 turn_font = pygame.font.Font(pygame.font.get_default_font(), 26)
 
 screen.fill(BG_COLOR)
@@ -29,7 +32,7 @@ board.draw_board()
 
 
 def clearBg():
-    img = pygame.image.load("assests/bg.png")
+    img = pygame.image.load(BASE_PATH + "/assets/bg.png")
     img = pygame.transform.scale2x(img)
     screen.blit(img, [0, 0, SCREEN_WIDTH, SCREEN_HEIGHT])
 
