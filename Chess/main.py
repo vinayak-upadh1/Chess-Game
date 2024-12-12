@@ -1,10 +1,10 @@
 import sys
+
 import pygame
 from chessBoard import ChessBoard
 
-
-SOLID_BLUE = (50,50,200,127)
-BG_COLOR = (4,84,4)
+SOLID_BLUE = (50, 50, 200, 127)
+BG_COLOR = (4, 84, 4)
 
 # CONSTANTS
 SCREEN_HEIGHT = None
@@ -14,23 +14,25 @@ selector = 1
 player = 1
 
 pygame.init()
-screen = pygame.display.set_mode((800,450), pygame.RESIZABLE)
+screen = pygame.display.set_mode((800, 450), pygame.RESIZABLE)
 # screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)
 pygame.display.set_caption("Chess")
-pygame.display.set_icon(pygame.image.load('assests/W_QUEEN.png'))
+pygame.display.set_icon(pygame.image.load("assests/W_QUEEN.png"))
 turn_font = pygame.font.Font(pygame.font.get_default_font(), 26)
 
 screen.fill(BG_COLOR)
 SCREEN_WIDTH = screen.get_rect().width
 SCREEN_HEIGHT = screen.get_rect().height
 
-board = ChessBoard(screen,SCREEN_WIDTH,SCREEN_HEIGHT)
+board = ChessBoard(screen, SCREEN_WIDTH, SCREEN_HEIGHT)
 board.draw_board()
 
+
 def clearBg():
-    img = pygame.image.load('assests/bg.png')
+    img = pygame.image.load("assests/bg.png")
     img = pygame.transform.scale2x(img)
-    screen.blit(img, [0,0,SCREEN_WIDTH,SCREEN_HEIGHT])
+    screen.blit(img, [0, 0, SCREEN_WIDTH, SCREEN_HEIGHT])
+
 
 def key_down(event):
     if event.key == pygame.K_ESCAPE:
@@ -45,27 +47,32 @@ def key_down(event):
         for row in board.black_attacking_cells:
             print(row)
 
+
 def mouse_click(event):
     global selector, player
     if event.button == 1:
         pos = event.pos
-        status,player = board.select_box(pos,selector,player)
+        status, player = board.select_box(pos, selector, player)
         if status:
             selector *= -1
 
+
 def turn_indicator(turn_text):
-    turn_surface = pygame.surface.Surface((int(SCREEN_WIDTH*0.05),SCREEN_HEIGHT), pygame.SRCALPHA)
+    turn_surface = pygame.surface.Surface(
+        (int(SCREEN_WIDTH * 0.05), SCREEN_HEIGHT), pygame.SRCALPHA
+    )
     turn_surface.fill(SOLID_BLUE)
-    text = turn_font.render(turn_text, True, (255,255,255))
+    text = turn_font.render(turn_text, True, (255, 255, 255))
     text = pygame.transform.rotate(text, 90)
     text_rect = text.get_rect()
-    text_rect.center = (int(SCREEN_WIDTH*0.05)//2,SCREEN_HEIGHT//2)
-    turn_surface.blit(text,text_rect)
+    text_rect.center = (int(SCREEN_WIDTH * 0.05) // 2, SCREEN_HEIGHT // 2)
+    turn_surface.blit(text, text_rect)
     return turn_surface
 
+
 curr_player = -1
-player_name = ['', 'White\'s Turn', 'Black\'s Turn']
-while(True):
+player_name = ["", "White's Turn", "Black's Turn"]
+while True:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             key_down(event)
@@ -84,7 +91,7 @@ while(True):
     if curr_player != player:
         curr_player = player
 
-    screen.blit(turn_indicator(player_name[player]),(0,0))
+    screen.blit(turn_indicator(player_name[player]), (0, 0))
     board.draw_board()
     pygame.time.Clock().tick(30)
     pygame.display.update()
