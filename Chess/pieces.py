@@ -1,7 +1,7 @@
 import pygame
 
-class Piece:
 
+class Piece:
     def __init__(self, size):
         self.size = size
         self.piece = {
@@ -20,6 +20,7 @@ class Piece:
         }
 
     def get_piece(self, piece_name):
-        if self.piece.get(piece_name,None) == None:
+        piece = self.piece.get(piece_name, None)
+        if piece is None:
             return None
-        return pygame.transform.smoothscale(pygame.image.load(self.piece.get(piece_name,None)), self.size)
+        return pygame.transform.smoothscale(pygame.image.load(piece), self.size)
